@@ -4,11 +4,13 @@ public class Users {
     private String androidId;
     private String email;
     private String userId;
+    private String accessibilityTime;
 
-    public Users(String userid, String androidId, String email) {
+    public Users(String userid, String androidId, String email, String accessibilityTime) {
         this.userId = userid;
         this.androidId = androidId;
         this.email = email;
+        this.accessibilityTime = accessibilityTime;
     }
 
     public String getUserId() {
@@ -35,12 +37,17 @@ public class Users {
         this.email = email;
     }
 
+    public String getAccessibilityTime() {
+        return accessibilityTime;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
                 "androidId='" + androidId + '\'' +
                 ", email='" + email + '\'' +
                 ", userId='" + userId + '\'' +
+                ", accessibilityTime='" + accessibilityTime + '\'' +
                 '}';
     }
 }

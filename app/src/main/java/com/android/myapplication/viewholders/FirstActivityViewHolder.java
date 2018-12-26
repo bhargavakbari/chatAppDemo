@@ -60,7 +60,8 @@ public class FirstActivityViewHolder extends BaseViewHolder {
         allUsers = (ArrayList<Users>) items;
         groupNameTv.setText("User Id: " + allUsers.get(position).getUserId()
                 + "\n\n" + "androidId: " + allUsers.get(position).getAndroidId()
-                + "\n\n" + "Email: " + allUsers.get(position).getEmail());
+                + "\n\n" + "Email: " + allUsers.get(position).getEmail()
+                + "\n\n" + allUsers.get(position).getAccessibilityTime());
         timeTextViewUser.setText("");
 
     }
