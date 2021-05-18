@@ -81,6 +81,7 @@ public class ThirdActivity extends AppCompatActivity implements RecyclerViewClic
                 messageRecyclerList.setAdapter(genericAdapter);
             }
 
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
