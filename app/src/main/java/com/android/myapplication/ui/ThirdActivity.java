@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.android.myapplication.Pojo.OriginalChatMessage;
 import com.android.myapplication.Pojo.SocialMediaGrps;
 import com.android.myapplication.R;
 import com.android.myapplication.adapters.GenericAdapter;
 import com.android.myapplication.listener.RecyclerViewClickListner;
 import com.android.myapplication.utils.IntentManager;
 import com.android.myapplication.utils.SpacesItemDecoration;
+import com.android.myapplication.utils.Utils;
 import com.android.myapplication.viewholders.GroupNameViewHolder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,8 +24,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TreeMap;
 
 import static com.android.myapplication.utils.SpacesItemDecoration.CHAT_TAG;
+import static com.android.myapplication.utils.Utils.DATE_FORMAT;
 
 public class ThirdActivity extends AppCompatActivity implements RecyclerViewClickListner {
 
@@ -61,7 +70,11 @@ public class ThirdActivity extends AppCompatActivity implements RecyclerViewClic
                     SocialMediaGrps socialMediaGrps = new SocialMediaGrps(grpName, timeStamp);
                     allSocialMeadiGrpMsg.add(socialMediaGrps);
                 }
-
+                try {
+                    sortAllSocialMediaGrpMsgBasedOnTime(allSocialMeadiGrpMsg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 hideProgressBar();
                 Log.d(TAG, allSocialMeadiGrpMsg.toString());
                 genericAdapter = new GenericAdapter(allSocialMeadiGrpMsg, ThirdActivity.this, R.layout.item_grp_name, GroupNameViewHolder.class.getCanonicalName(), ThirdActivity.this);
@@ -74,6 +87,17 @@ public class ThirdActivity extends AppCompatActivity implements RecyclerViewClic
             }
         };
         mFireBaseDatabaseReference.addListenerForSingleValueEvent(postListener);
+    }
+
+    void sortAllSocialMediaGrpMsgBasedOnTime(ArrayList<SocialMediaGrps> allSocialMeadiGrpMsg) {
+        Collections.sort(allSocialMeadiGrpMsg, new Comparator<SocialMediaGrps>() {
+            @Override
+            public int compare(SocialMediaGrps lhs, SocialMediaGrps rhs) {
+                Date date1 = Utils.getDateFromString(lhs.getLastUsedFormatedTime(), DATE_FORMAT);
+                Date date2 = Utils.getDateFromString(rhs.getLastUsedFormatedTime(), DATE_FORMAT);
+                return date2.compareTo(date1);
+            }
+        });
     }
 
     private void showProgressBar() {

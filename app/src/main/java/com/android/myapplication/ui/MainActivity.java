@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                     String userId = userSnapShot.getKey();
                     String androidId = userSnapShot.child("AndroidId").getValue().toString();
                     String email = userSnapShot.child("Email").getValue().toString();
-                    String accessiblityTime = userSnapShot.child("AccessiblityTime").getValue().toString();
+                    String accessiblityTime = "";
                     Users user = new Users(userId, androidId, email, accessiblityTime);
                     usersArrayList.add(user);
                 }

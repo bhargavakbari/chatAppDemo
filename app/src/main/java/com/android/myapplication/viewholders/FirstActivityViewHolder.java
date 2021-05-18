@@ -63,6 +63,5 @@ public class FirstActivityViewHolder extends BaseViewHolder {
                 + "\n\n" + "Email: " + allUsers.get(position).getEmail()
                 + "\n\n" + allUsers.get(position).getAccessibilityTime());
         timeTextViewUser.setText("");
-
     }
 }
